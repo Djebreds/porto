@@ -3,7 +3,7 @@
 </script>
 
 <div class="flex min-h-screen flex-col items-center justify-center gap-4 p-4 text-center">
-	<h1 class="text-6xl font-bold text-slate-900">{page.status}</h1>
+	<h1 class="font-heading text-6xl font-extrabold text-slate-900">{page.status}</h1>
 	<p class="text-lg text-slate-600">
 		{page.error?.message ?? 'Something went wrong'}
 	</p>

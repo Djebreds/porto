@@ -17,8 +17,10 @@
 		"@eslint/compat": "^2.0.4",
 		"@eslint/js": "^10.0.1",
 		"@sveltejs/adapter-auto": "^7.0.1",
+		"@sveltejs/adapter-node": "^5.5.4",
 		"@sveltejs/kit": "^2.57.0",
-		"@sveltejs/vite-plugin-svelte": "^7.0.0",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.2.2",
 		"@types/node": "^22",
 		"eslint": "^10.2.0",
@@ -34,5 +36,16 @@
 		"typescript": "^6.0.2",
 		"typescript-eslint": "^8.58.1",
 		"vite": "^8.0.7"
+	},
+	"dependencies": {
+		"@giscus/svelte": "^3.1.0",
+		"clsx": "^2.1.1",
+		"gray-matter": "^4.0.3",
+		"lucide-svelte": "^1.0.1",
+		"marked": "^18.0.3",
+		"mdsvex": "^0.12.7",
+		"mermaid": "^11.14.0",
+		"shiki": "^4.0.2",
+		"tailwind-merge": "^3.6.0"
 	}
 }

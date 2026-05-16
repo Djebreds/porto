@@ -1,1 +1,430 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Averta Std — titles & headings */
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-RegularItalic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-Semibold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-SemiboldItalic.ttf') format('truetype');
+	font-weight: 600;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-BoldItalic.ttf') format('truetype');
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-ExtraBold.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-ExtraBoldItalic.ttf') format('truetype');
+	font-weight: 800;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Averta Std';
+	src: url('/fonts/averta-std/AvertaStd-BlackItalic.ttf') format('truetype');
+	font-weight: 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* Circular Std — body & subtitles */
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-Book.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-BookItalic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-MediumItalic.woff') format('woff');
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-Black.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Circular Std';
+	src: url('/fonts/circular-std/CircularStd-BlackItalic.woff') format('woff');
+	font-weight: 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+@theme {
+	--font-sans:
+		'Circular Std', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol';
+
+	--font-heading:
+		'Averta Std', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol';
+
+	--color-primary-100: #3868a7;
+	--color-primary-200: #305a91;
+	--color-primary-300: #294d7b;
+	--color-primary-400: #223f66;
+	--color-primary-500: #223f66;
+	--color-primary-600: #15273f;
+
+	--color-secondary-100: #c2e5ff;
+	--color-secondary-200: #85ccff;
+	--color-secondary-300: #0077cc;
+	--color-secondary-400: #0065ad;
+	--color-secondary-500: #00538f;
+	--color-secondary-600: #003153;
+
+	/* Slate CSS vars — used by BentoGrid items and InfiniteMarquee chips */
+	--slate-800: #1e293b;
+	--slate-900: #0f172a;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		/* Avoid layout shift when vertical scrollbar appears/disappears between routes */
+		scrollbar-gutter: stable;
+		/* Full-page VT snapshots that translate wider than 100vw shouldn’t spawn a horizontal scrollbar */
+		overflow-x: clip;
+	}
+	body {
+		@apply min-h-dvh bg-neutral-950 font-sans text-neutral-100 antialiased;
+	}
+
+	/* Use :is() for higher specificity so this beats Tailwind preflight / prose resets */
+	:is(h1, h2, h3, h4, h5, h6) {
+		font-family: var(--font-heading);
+	}
+}
+
+/* Explicit utility — must live outside @layer so it overrides preflight and prose */
+.font-heading {
+	font-family: var(--font-heading);
+}
+
+@layer components {
+	/* Page base: soft vertical blend so fixed layers don’t “cut” to flat black */
+	.page-base {
+		background-color: rgb(10 10 12);
+		background-image: linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--color-primary-500) 24%, rgb(8 12 22)) 0%,
+			color-mix(in srgb, var(--color-primary-600) 10%, rgb(10 10 12)) 28%,
+			rgb(10 10 12) 58%,
+			rgb(10 10 12) 100%
+		);
+	}
+
+	.mesh-bg {
+		background: radial-gradient(
+			ellipse 85% 70% at 50% -15%,
+			rgba(41, 77, 123, 0.42),
+			rgba(34, 63, 102, 0.12) 42%,
+			rgba(255, 255, 255, 0)
+		);
+	}
+
+	.grid-bg {
+		background-image:
+			linear-gradient(to right, rgba(79, 79, 79, 0.18) 1px, transparent 1px),
+			linear-gradient(to bottom, rgba(79, 79, 79, 0.18) 1px, transparent 1px);
+		background-size: 75px 75px;
+		/* Feather over a tall band — avoids a hard horizon where the mask hits transparent */
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			black 0%,
+			rgba(0, 0, 0, 0.92) 12%,
+			rgba(0, 0, 0, 0.5) 38%,
+			rgba(0, 0, 0, 0.12) 58%,
+			transparent 78%
+		);
+		mask-image: linear-gradient(
+			to bottom,
+			black 0%,
+			rgba(0, 0, 0, 0.92) 12%,
+			rgba(0, 0, 0, 0.5) 38%,
+			rgba(0, 0, 0, 0.12) 58%,
+			transparent 78%
+		);
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+	}
+
+	.glass-pill {
+		@apply rounded-full border border-white/10 bg-white/5 shadow-lg shadow-black/20 backdrop-blur-xl;
+	}
+
+	/**
+	 * Frosted UI: backdrop-filter on this box (fixed nav/chat compositing is reliable).
+	 * Avoid sticky + animated transforms on ancestors; opacity < 1 on an ancestor is a backdrop root.
+	 */
+	.glass-frost {
+		position: relative;
+		transform: translateZ(0);
+		-webkit-backdrop-filter: blur(16px);
+		backdrop-filter: blur(16px);
+	}
+
+	.gradient-title {
+		@apply bg-gradient-to-b from-secondary-100 to-secondary-600 bg-clip-text text-transparent;
+	}
+
+	/* kube.io `<main>` in DevTools renders ~728px wide (max-w-4xl + viewport); we match that column */
+	.blog-prose {
+		@apply prose max-w-none prose-invert prose-p:text-left prose-p:text-[16px] prose-p:leading-[22px] prose-p:sm:text-justify prose-a:text-secondary-200 prose-a:underline-offset-4 hover:prose-a:text-white prose-code:text-secondary-100 prose-pre:bg-transparent prose-pre:p-0;
+	}
+
+	.blog-prose .markdown-code pre {
+		@apply m-0 bg-transparent p-4 text-sm;
+	}
+
+	.blog-prose .markdown-mermaid svg {
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* Chat bubble markdown — compact prose for the AI chat widget */
+	.chat-prose {
+		@apply prose prose-invert max-w-none
+			prose-p:my-1 prose-p:text-sm prose-p:leading-relaxed prose-p:text-neutral-100
+			prose-headings:my-1 prose-headings:text-sm prose-headings:font-semibold prose-headings:text-white prose-headings:uppercase prose-headings:tracking-wide
+			prose-ul:my-1 prose-ul:pl-4 prose-li:my-0 prose-li:text-sm prose-li:text-neutral-100
+			prose-ol:my-1 prose-ol:pl-4
+			prose-strong:text-white prose-strong:font-semibold
+			prose-em:text-neutral-200
+			prose-code:rounded prose-code:bg-white/10 prose-code:px-1 prose-code:py-0.5 prose-code:text-xs prose-code:text-secondary-100 prose-code:before:content-none prose-code:after:content-none
+			prose-pre:my-2 prose-pre:rounded-xl prose-pre:border prose-pre:border-white/10 prose-pre:bg-black/40 prose-pre:p-3 prose-pre:text-xs
+			prose-a:text-secondary-200 prose-a:underline-offset-2 hover:prose-a:text-white
+			prose-blockquote:my-1 prose-blockquote:border-l-2 prose-blockquote:border-white/20 prose-blockquote:pl-3 prose-blockquote:text-neutral-300
+			prose-hr:my-2 prose-hr:border-white/10;
+	}
+
+	/* Remove top/bottom margin from first/last children inside a chat bubble */
+	.chat-prose > :first-child { margin-top: 0 !important; }
+	.chat-prose > :last-child  { margin-bottom: 0 !important; }
+}
+
+/* Must live outside @layer to override unlayered .prose h1 from typography plugin.
+   Double-class selector (0,2,0) beats .prose :where(h1) (0,0,0). */
+.blog-prose.blog-prose :is(h1, h2, h3, h4, h5, h6) {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+/** Marquee for tech stack (new - matching original) */
+@keyframes scroll {
+	to {
+		transform: translate(calc(-200% - 0.5rem));
+	}
+}
+
+.animate-scroll {
+	animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear
+		infinite;
+}
+
+/** Marquee legacy (keep for compatibility) */
+@keyframes marquee {
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+.marquee-track {
+	animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.marquee-track {
+		animation: none;
+	}
+}
+
+/** Meteor animation */
+@keyframes meteor {
+	0% {
+		transform: rotate(215deg) translateX(0);
+		opacity: 1;
+	}
+	70% {
+		opacity: 1;
+	}
+	100% {
+		transform: rotate(215deg) translateX(-500px);
+		opacity: 0;
+	}
+}
+
+.animate-meteor {
+	animation: meteor var(--meteor-duration, 5s) linear var(--meteor-delay, 0s) infinite;
+}
+
+/** Text reveal (slide up from clip) */
+@keyframes text-reveal {
+	0% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.animate-text-reveal {
+	animation: text-reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s both;
+}
+
+/** Dot-pattern utility (matches bg-dot-primary-500 from original) */
+.bg-dot {
+	background-image: radial-gradient(
+		circle,
+		var(--dot-color, rgba(34, 63, 102, 0.6)) 1.6px,
+		transparent 1.6px
+	);
+	background-size: 35px 35px;
+}
+
+/** Spin animation used in gradient borders */
+@keyframes spin-slow {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/** Anomalous matter hero entrance */
+@keyframes fade-in-long {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fade-in-long {
+	animation: fade-in-long 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-fade-in-long {
+		animation: none;
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Blog SPA: View Transitions — avoid transforming `:root` snapshots (`translateX`, etc.).
+ * Translated layers extend past the viewport → horizontal scrollbar flickers → reads as “shake”.
+ * Let the browser handle root; keep motion on named pairs only (`view-transition-name` on titles). */
+@media (prefers-reduced-motion: no-preference) {
+	:root::view-transition-old(root),
+	:root::view-transition-new(root) {
+		animation: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}

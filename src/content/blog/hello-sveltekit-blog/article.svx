@@ -1,0 +1,46 @@
+---
+title: 'Hello, SvelteKit blog'
+description: 'A short welcome post with a code sample, interactive graphic, and giscus-ready comments.'
+date: '2026-05-10'
+---
+
+<script lang="ts">
+	import WaveDemo from './WaveDemo.svelte';
+</script>
+
+This site pairs a **SvelteKit** frontend with Markdown blogs (via **mdsvex** when you need co-located components), **Shiki** highlighting for plain Markdown posts, and **giscus** for public comments backed by GitHub Discussions.
+
+Below is an embedded Svelte canvas demo — the same pattern as co-located `./graphics/*` imports on kube-style blog folders:
+
+<WaveDemo />
+
+Use fenced **`mermaid`** blocks for diagrams (flowcharts, sequence diagrams, etc.):
+
+```mermaid
+flowchart LR
+  A[Markdown] --> B[Marked]
+  B --> C[HTML]
+  C --> D[Mermaid hydrates in browser]
+```
+
+## Why this stack?
+
+- **Fast iteration** with Vite + Svelte 5 runes
+- **Portable content** as blog folders in the repo (`article.svx` + sibling `.svelte` components)
+- **Accessible discussions** without running a comment database
+
+## Tiny code sample
+
+```typescript
+type Post = {
+	title: string;
+	slug: string;
+};
+
+export const post: Post = {
+	title: 'Hello, SvelteKit blog',
+	slug: 'hello-sveltekit-blog'
+};
+```
+
+Try leaving a comment below once giscus is configured for this repository.

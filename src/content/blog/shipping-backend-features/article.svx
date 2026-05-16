@@ -1,0 +1,25 @@
+---
+title: 'Shipping backend features without losing the plot'
+description: 'Notes on scopes, boundaries, and the boring parts that keep services healthy.'
+date: '2026-05-01'
+---
+
+Most production issues are not missing features — they are unclear boundaries, surprise coupling, and invisible operational load.
+
+## A practical checklist
+
+1. **Write the happy path as a sequence diagram** (even a rough one).
+2. **Name your failure modes** — timeouts, partial writes, duplicate events.
+3. **Instrument first**: structured logs + one metric that proves the feature works.
+
+## Example SQL snippet
+
+```sql
+select id, status, updated_at
+from missions
+where status = 'active'
+order by updated_at desc
+limit 50;
+```
+
+If this resonates, open a discussion on GitHub and share what you would add to the list.

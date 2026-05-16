@@ -1,2 +1,1 @@
-// place files you want to import through the `$lib` alias in this folder.
-// e.g. export { default as MyComponent } from './components/MyComponent.svelte';
+// `$lib` barrel — import from paths like `$lib/components/...` directly in this project.
