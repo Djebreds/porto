@@ -1,7 +1,20 @@
-# Pin Node for Nixpacks: without this it falls back to Node 18, which is EOL and
-# no longer in nixpkgs (and Vite 8 needs Node 20.19+).
+# Nixpacks build plan (used by Dokploy).
+#
+# Without this, Nixpacks sees bun.lock, picks the Bun provider, and defaults to
+# Node 18, which is EOL and no longer in nixpkgs, so the image build fails.
+# Pin Node 22 (Vite 8 needs 20.19+) and build with npm against package-lock.json.
+
 [variables]
 NIXPACKS_NODE_VERSION = '22'
+
+[phases.setup]
+nixPkgs = ['nodejs_22']
+
+[phases.install]
+cmds = ['npm ci']
+
+[phases.build]
+cmds = ['npm run build']
 
 [start]
 cmd = 'node build'
