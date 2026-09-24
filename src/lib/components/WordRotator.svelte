@@ -42,6 +42,7 @@
 	.rotor-word {
 		position: absolute;
 		inset: 0;
+		text-align: left;
 		white-space: nowrap;
 		animation: rotor-in 520ms cubic-bezier(0.22, 1, 0.36, 1);
 	}

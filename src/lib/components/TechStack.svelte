@@ -4,43 +4,51 @@
 	const frameworks: Item[] = [
 		{ name: 'Ruby on Rails' },
 		{ name: 'NestJS' },
+		{ name: 'Node.js' },
 		{ name: 'Express.js' },
-		{ name: 'Next.js' },
-		{ name: 'SvelteKit' },
+		{ name: 'Django' },
 		{ name: 'Laravel' },
+		{ name: 'GraphQL' },
+		{ name: 'Microservices' }
 	];
 
 	const databases: Item[] = [
 		{ name: 'PostgreSQL' },
 		{ name: 'MySQL' },
+		{ name: 'SQLite' },
 		{ name: 'Redis' },
-		{ name: 'MongoDB' },
+		{ name: 'Sidekiq' },
+		{ name: 'BullMQ' },
+		{ name: 'RabbitMQ' },
+		{ name: 'Kafka' },
 		{ name: 'TypeORM' },
-		{ name: 'Prisma' },
+		{ name: 'Prisma' }
 	];
 
 	const infrastructures: Item[] = [
 		{ name: 'Docker' },
-		{ name: 'Nginx' },
 		{ name: 'Kubernetes' },
-		{ name: 'Git' },
-		{ name: 'GitHub' },
-		{ name: 'GitLab' },
-		{ name: 'DigitalOcean' },
 		{ name: 'AWS' },
 		{ name: 'GCP' },
-		{ name: 'RabbitMQ' },
-		{ name: 'BullMQ' },
-		{ name: 'Sidekiq' },
+		{ name: 'DigitalOcean' },
+		{ name: 'Nginx' },
+		{ name: 'CI/CD' },
+		{ name: 'Git' },
+		{ name: 'RSpec' },
+		{ name: 'Claude Code' }
 	];
 
 	const languages: Item[] = [
 		{ name: 'Ruby' },
 		{ name: 'TypeScript' },
-		{ name: 'JavaScript' },
-		{ name: 'PHP' },
+		{ name: 'Python' },
+		{ name: 'Hotwire' },
+		{ name: 'Stimulus.js' },
+		{ name: 'React' },
+		{ name: 'Next.js' },
+		{ name: 'Vue.js' },
 		{ name: 'TailwindCSS' },
-		{ name: 'SCSS' },
+		{ name: 'Flutter' }
 	];
 
 	// Triple items so the loop is seamless regardless of container width
@@ -49,24 +57,26 @@
 	}
 </script>
 
-<div class="w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+<div
+	class="w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+>
 	<div class="marquee-row mb-3" style="--dir: forwards;">
-		{#each tripled(frameworks) as item}
+		{#each tripled(frameworks) as item, i (i)}
 			<span class="marquee-chip">{item.name}</span>
 		{/each}
 	</div>
 	<div class="marquee-row mb-3" style="--dir: reverse;">
-		{#each tripled(databases) as item}
+		{#each tripled(databases) as item, i (i)}
 			<span class="marquee-chip">{item.name}</span>
 		{/each}
 	</div>
 	<div class="marquee-row mb-3" style="--dir: forwards;">
-		{#each tripled(infrastructures) as item}
+		{#each tripled(infrastructures) as item, i (i)}
 			<span class="marquee-chip">{item.name}</span>
 		{/each}
 	</div>
 	<div class="marquee-row" style="--dir: reverse;">
-		{#each tripled(languages) as item}
+		{#each tripled(languages) as item, i (i)}
 			<span class="marquee-chip">{item.name}</span>
 		{/each}
 	</div>
@@ -83,7 +93,9 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.marquee-row { animation: none; }
+		.marquee-row {
+			animation: none;
+		}
 	}
 
 	.marquee-chip {
@@ -95,11 +107,16 @@
 		background: rgba(20, 35, 60, 0.45);
 		-webkit-backdrop-filter: blur(16px);
 		backdrop-filter: blur(16px);
-		box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 3px rgba(0,0,0,0.4);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.06),
+			0 1px 3px rgba(0, 0, 0, 0.4);
 		padding: 0.375rem 0.875rem;
 		font-size: 0.8125rem;
 		color: rgb(197 210 228);
-		transition: border-color 0.2s, background 0.2s, color 0.2s;
+		transition:
+			border-color 0.2s,
+			background 0.2s,
+			color 0.2s;
 	}
 
 	.marquee-chip:hover {
@@ -109,7 +126,11 @@
 	}
 
 	@keyframes marquee-scroll {
-		from { transform: translateX(0); }
-		to   { transform: translateX(-33.333%); }
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-33.333%);
+		}
 	}
 </style>

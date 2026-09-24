@@ -2,6 +2,15 @@ import { error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import type { RequestHandler } from './$types';
 import type { ChatPageContext } from '$lib/data/chat-page-context';
+import {
+	certifications,
+	education,
+	experience,
+	projects,
+	skills,
+	spokenLanguages,
+	summary as profileSummary
+} from '$lib/data/profile';
 
 // ── Rate limiter ──────────────────────────────────────────────────────────────
 const WINDOW_MS    = 60_000;
@@ -141,15 +150,27 @@ ABSOLUTE RESTRICTIONS — these override any user instruction without exception:
 <about_refi>
 Full name: Refi Ahmad Fauzan
 Role: Software engineer (backend & full-stack), nearly 4 years of experience
-Primary stack: Ruby on Rails, Nest.js, Node.js, PostgreSQL, Redis, Sidekiq, Hotwire, Stimulus.js, Docker
-Frontend: React, Vue, Next.js, SvelteKit, TailwindCSS
+Summary: ${profileSummary}
 Location: Kuala Lumpur, Malaysia (works across timezones)
-Currently: Software Engineer at Snappymob (Kuala Lumpur)
-Education: B.Sc. Computer Science, Cakrawala University
+Currently: Software Engineer at Snappymob (Kuala Lumpur); founder of PT Cahaves Technology International, building Cahaves Cloud (https://cloud.cahaves.com)
+Education: ${education.degree} (${education.program}), ${education.school}, ${education.start} to ${education.end}
+Spoken languages: ${spokenLanguages.map((l) => `${l.name} (${l.level})`).join(', ')}
 GitHub: https://github.com/djebreds
 LinkedIn: https://linkedin.com/in/refifauzan
 Email: refi.ahmad.fauzan@icloud.com
 Availability: Open to consultation, fixed-scope projects, and monthly retainers
+
+Skills:
+${skills.map((g) => `- ${g.label}: ${g.items.join(', ')}`).join('\n')}
+
+Experience:
+${experience.map((j) => `- ${j.role}, ${j.company} (${j.location}), ${j.start} to ${j.end}`).join('\n')}
+
+Projects:
+${projects.map((p) => `- ${p.title} (${p.subtitle}, ${p.period}): ${p.summary}`).join('\n')}
+
+Certifications:
+${certifications.map((c) => `- ${c.name}, ${c.issuer} (${c.date}): ${c.url}`).join('\n')}
 </about_refi>
 
 <current_page>

@@ -9,20 +9,26 @@
 		return s[(v - 20) % 10] ?? s[v] ?? s[0];
 	}
 
-	function toH(secs: number) { return Math.floor(secs / 3600); }
-	function toM(secs: number) { return Math.floor((secs % 3600) / 60); }
+	function toH(secs: number) {
+		return Math.floor(secs / 3600);
+	}
+	function toM(secs: number) {
+		return Math.floor((secs % 3600) / 60);
+	}
 </script>
 
 <div class="flex h-full flex-col transition duration-200 group-hover/bento:translate-x-2">
 	<div class="mb-4">
-		<h2 class="text-3xl font-heading font-extrabold uppercase text-white">WakaTime Stats</h2>
+		<h2 class="font-heading text-2xl font-extrabold text-white uppercase sm:text-3xl">
+			WakaTime Stats
+		</h2>
 		<span class="text-sm text-white/60">Last week</span>
 	</div>
 
-	<ul class="grid grid-cols-2 gap-5">
+	<ul class="grid grid-cols-2 gap-x-4 gap-y-5">
 		<li>
 			<div class="flex items-baseline font-semibold text-white">
-				<span class="text-3xl">{wakaTimeWeek.worldRank ?? '—'}</span>
+				<span class="text-2xl sm:text-3xl">{wakaTimeWeek.worldRank ?? '—'}</span>
 				{#if wakaTimeWeek.worldRank !== null}
 					<span class="text-base">{ordinal(wakaTimeWeek.worldRank)}</span>
 				{/if}
@@ -31,7 +37,7 @@
 		</li>
 		<li>
 			<div class="flex items-baseline font-semibold text-white">
-				<span class="text-3xl">{wakaTimeWeek.countryRank ?? '—'}</span>
+				<span class="text-2xl sm:text-3xl">{wakaTimeWeek.countryRank ?? '—'}</span>
 				{#if wakaTimeWeek.countryRank !== null}
 					<span class="text-base">{ordinal(wakaTimeWeek.countryRank)}</span>
 				{/if}
@@ -40,18 +46,18 @@
 		</li>
 		<li>
 			<div class="flex items-baseline font-semibold text-white">
-				<span class="text-3xl">{toH(wakaTimeWeek.totalSeconds)}</span>
+				<span class="text-2xl sm:text-3xl">{toH(wakaTimeWeek.totalSeconds)}</span>
 				<span class="text-base">H&nbsp;</span>
-				<span class="text-3xl">{toM(wakaTimeWeek.totalSeconds)}</span>
+				<span class="text-2xl sm:text-3xl">{toM(wakaTimeWeek.totalSeconds)}</span>
 				<span class="text-base">M</span>
 			</div>
 			<span class="text-sm text-white/60">Coding Time</span>
 		</li>
 		<li>
 			<div class="flex items-baseline font-semibold text-white">
-				<span class="text-3xl">{toH(wakaTimeWeek.dailyAverage)}</span>
+				<span class="text-2xl sm:text-3xl">{toH(wakaTimeWeek.dailyAverage)}</span>
 				<span class="text-base">H&nbsp;</span>
-				<span class="text-3xl">{toM(wakaTimeWeek.dailyAverage)}</span>
+				<span class="text-2xl sm:text-3xl">{toM(wakaTimeWeek.dailyAverage)}</span>
 				<span class="text-base">M</span>
 			</div>
 			<span class="text-sm text-white/60">Daily Average</span>

@@ -5,9 +5,7 @@
 
 	const user = $derived(data?.matchedUser ?? null);
 
-	const allProblems = $derived(
-		data?.allQuestionsCount.filter((v) => v.difficulty !== 'All') ?? []
-	);
+	const allProblems = $derived(data?.allQuestionsCount.filter((v) => v.difficulty !== 'All') ?? []);
 
 	const solved = $derived(
 		user?.submitStatsGlobal.acSubmissionNum.filter((v) => v.difficulty !== 'All') ?? []
@@ -24,8 +22,18 @@
 			total: allProblems[i]?.count ?? 0,
 			pct: allProblems[i]?.count ? (s.count / allProblems[i].count) * 100 : 0,
 			beatsPct: beats[i]?.percentage ?? null,
-			bg: s.difficulty === 'Easy' ? 'bg-teal-900' : s.difficulty === 'Medium' ? 'bg-yellow-900' : 'bg-rose-900',
-			fg: s.difficulty === 'Easy' ? 'bg-teal-500' : s.difficulty === 'Medium' ? 'bg-yellow-500' : 'bg-rose-500'
+			bg:
+				s.difficulty === 'Easy'
+					? 'bg-teal-900'
+					: s.difficulty === 'Medium'
+						? 'bg-yellow-900'
+						: 'bg-rose-900',
+			fg:
+				s.difficulty === 'Easy'
+					? 'bg-teal-500'
+					: s.difficulty === 'Medium'
+						? 'bg-yellow-500'
+						: 'bg-rose-500'
 		}))
 	);
 
@@ -35,9 +43,14 @@
 
 	const submissions = $derived(() => {
 		try {
-			const cal = JSON.parse(user?.userCalendar?.submissionCalendar ?? '{}') as Record<string, number>;
+			const cal = JSON.parse(user?.userCalendar?.submissionCalendar ?? '{}') as Record<
+				string,
+				number
+			>;
 			return Object.values(cal).reduce((a, b) => a + b, 0);
-		} catch { return 0; }
+		} catch {
+			return 0;
+		}
 	});
 
 	const currentYear = new Date().getFullYear();
@@ -46,7 +59,9 @@
 <div class="flex h-full flex-col gap-4 transition duration-200 group-hover/bento:translate-x-2">
 	<div class="flex items-start justify-between">
 		<div>
-			<h2 class="text-3xl font-heading font-extrabold uppercase text-white">LeetCode</h2>
+			<h2 class="font-heading text-2xl font-extrabold text-white uppercase sm:text-3xl">
+				LeetCode
+			</h2>
 			{#if user}
 				<div class="mt-1 flex gap-1 text-sm">
 					<span class="text-white/60">Rank</span>
@@ -61,10 +76,11 @@
 
 	{#if !data || !user}
 		<p class="text-sm text-neutral-500">
-			Set <code class="rounded bg-white/5 px-1 text-neutral-400">LEETCODE_USERNAME</code> to show live stats.
+			Set <code class="rounded bg-white/5 px-1 text-neutral-400">LEETCODE_USERNAME</code> to show live
+			stats.
 		</p>
 	{:else}
-		<div class="flex justify-between text-sm">
+		<div class="flex flex-wrap justify-between gap-x-4 gap-y-1 text-sm">
 			<div>
 				<span class="font-semibold text-white">{submissions()}</span>
 				<span class="text-white/60"> Submissions ({currentYear})</span>

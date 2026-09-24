@@ -8,6 +8,7 @@
 		{ title: 'About', href: appLink('/#about') },
 		{ title: 'Skills', href: appLink('/#skills') },
 		{ title: 'Projects', href: appLink('/#projects') },
+		{ title: 'Certs', href: appLink('/#certifications') },
 		{ title: 'Blogs', href: appLink('/blog') },
 		{ title: 'Contact', href: appLink('/#contact') }
 	] as const;
@@ -23,13 +24,10 @@
 
 	function activeLinkIndex(): number {
 		const p = page.url.pathname;
-		if (p === '/blog' || p.startsWith('/blog/')) return 4;
+		if (p === '/blog' || p.startsWith('/blog/')) return links.findIndex((l) => l.title === 'Blogs');
 		const h = page.url.hash;
-		if (h === '#about') return 1;
-		if (h === '#skills') return 2;
-		if (h === '#projects') return 3;
-		if (h === '#contact') return 5;
-		return 0;
+		const i = h ? links.findIndex((l) => l.href.endsWith(`/${h}`)) : -1;
+		return i === -1 ? 0 : i;
 	}
 
 	function measure() {
@@ -68,15 +66,13 @@
 	});
 </script>
 
-<header
-	class="pointer-events-none fixed inset-x-0 top-6 z-40 mx-auto flex w-full justify-center"
->
-	<div class="pointer-events-auto mx-auto max-w-full px-4 sm:px-6">
+<header class="pointer-events-none fixed inset-x-0 top-6 z-40 mx-auto flex w-full justify-center">
+	<div class="pointer-events-auto mx-auto max-w-full px-2 sm:px-6">
 		<div
-			class="glass-frost flex h-12 items-center justify-center gap-2 rounded-full bg-primary-100/10 px-2 py-1 shadow-lg shadow-black/[0.04] sm:gap-3 sm:px-3"
+			class="glass-frost flex h-12 items-center justify-center gap-2 rounded-full bg-primary-100/10 px-1 py-1 shadow-lg shadow-black/[0.04] sm:gap-3 sm:px-3"
 		>
 			<nav
-				class="relative flex max-w-[calc(100vw-2rem)] justify-center overflow-x-auto"
+				class="relative flex max-w-[calc(100vw-1.5rem)] justify-center overflow-x-auto"
 				bind:this={listEl}
 			>
 				{#if indicator.width > 0}
@@ -88,14 +84,14 @@
 					></div>
 				{/if}
 				<ul
-					class="relative flex flex-nowrap items-center gap-0.5 text-xs font-medium sm:gap-1 sm:text-sm md:gap-6"
+					class="relative flex flex-nowrap items-center text-[0.75rem] font-medium sm:gap-1 sm:text-sm md:gap-4 lg:gap-6"
 				>
 					{#each links as link, i (link.href)}
 						<li class="shrink-0">
 							<a
 								href={link.href}
 								aria-current={i === activeIndex ? 'page' : undefined}
-								class="inline-flex rounded-full px-2 py-2 font-normal whitespace-nowrap transition-colors sm:px-2.5 {i ===
+								class="inline-flex rounded-full px-[0.3rem] py-2 font-normal whitespace-nowrap transition-colors min-[400px]:px-2 sm:px-2.5 {i ===
 								activeIndex
 									? 'text-white'
 									: 'text-neutral-300 hover:text-white'}"

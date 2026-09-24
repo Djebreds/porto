@@ -8,8 +8,11 @@
 
 	const hours = Math.round(wakaTime.data.total_seconds / 3600);
 	const since = (() => {
-		try { return format(parseISO(wakaTime.data.range.start), 'MMMM d, yyyy'); }
-		catch { return '—'; }
+		try {
+			return format(parseISO(wakaTime.data.range.start), 'MMMM d, yyyy');
+		} catch {
+			return '—';
+		}
 	})();
 
 	// Animated counter
@@ -67,12 +70,14 @@
 	<!-- Content -->
 	<div class="relative z-[2] flex h-full flex-col items-center justify-center gap-3 text-center">
 		<div class="transition duration-200 group-hover/bento:translate-x-2">
-			<h2 class="mb-3 font-heading text-3xl font-extrabold uppercase text-white sm:text-3xl md:text-4xl">
+			<h2
+				class="mb-1 font-heading text-2xl font-extrabold text-white uppercase sm:text-3xl lg:text-4xl"
+			>
 				WakaTime
 			</h2>
 		</div>
 
-		<h2 class="my-8 text-center text-7xl font-semibold text-white">
+		<h2 class="my-4 text-center text-6xl font-semibold text-white sm:my-6 sm:text-7xl">
 			<span bind:this={counterEl}>{displayValue}</span>
 			<span class="ms-2 text-xl">Hrs</span>
 		</h2>
