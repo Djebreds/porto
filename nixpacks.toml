@@ -1,0 +1,7 @@
+# Pin Node for Nixpacks: without this it falls back to Node 18, which is EOL and
+# no longer in nixpkgs (and Vite 8 needs Node 20.19+).
+[variables]
+NIXPACKS_NODE_VERSION = '22'
+
+[start]
+cmd = 'node build'
