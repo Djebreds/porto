@@ -3,12 +3,15 @@
 # Without this, Nixpacks sees bun.lock, picks the Bun provider, and defaults to
 # Node 18, which is EOL and no longer in nixpkgs, so the image build fails.
 # Pin Node 22 (Vite 8 needs 20.19+) and build with npm against package-lock.json.
+#
+# Bun is installed too so the build still works if the host sets
+# NIXPACKS_BUILD_CMD=bun run build (env vars override this file).
 
 [variables]
 NIXPACKS_NODE_VERSION = '22'
 
 [phases.setup]
-nixPkgs = ['nodejs_22']
+nixPkgs = ['nodejs_22', 'bun']
 
 [phases.install]
 cmds = ['npm ci']
