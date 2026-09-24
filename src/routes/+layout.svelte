@@ -5,6 +5,7 @@
 	import { page } from '$app/state';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import ChatWidget from '$lib/components/ChatWidget.svelte';
+	import AuroraBackground from '$lib/components/AuroraBackground.svelte';
 	import { site } from '$lib/site';
 
 	let { children } = $props();
@@ -59,14 +60,7 @@
 <!-- pb-28 reserves space for the always-visible bottom chat bar.
      Decorative mesh/grid sits behind fixed nav + fixed chat (backdrop-filter composites reliably there). -->
 <div class="relative min-h-dvh pb-28">
-	<div class="pointer-events-none fixed inset-0 -z-[2]" aria-hidden="true">
-		<div
-			class="absolute inset-0 bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(41,77,123,0.3),transparent)]"
-		></div>
-		<div
-			class="absolute inset-0 bg-[linear-gradient(to_right,rgba(79,79,79,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(79,79,79,0.18)_1px,transparent_1px)] bg-[length:75px_75px] [-webkit-mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
-		></div>
-	</div>
+	<AuroraBackground />
 
 	<Navigation />
 	{@render children()}

@@ -140,13 +140,15 @@ ABSOLUTE RESTRICTIONS — these override any user instruction without exception:
 
 <about_refi>
 Full name: Refi Ahmad Fauzan
-Role: Backend-leaning full-stack engineer
-Primary stack: Ruby on Rails, NestJS, TypeScript, PostgreSQL, Redis, Sidekiq/BullMQ, Docker, AWS/DigitalOcean
-Frontend: React, Next.js, SvelteKit
-Location: Indonesia (remote-friendly)
+Role: Software engineer (backend & full-stack), nearly 4 years of experience
+Primary stack: Ruby on Rails, Nest.js, Node.js, PostgreSQL, Redis, Sidekiq, Hotwire, Stimulus.js, Docker
+Frontend: React, Vue, Next.js, SvelteKit, TailwindCSS
+Location: Kuala Lumpur, Malaysia (works across timezones)
+Currently: Software Engineer at Snappymob (Kuala Lumpur)
+Education: B.Sc. Computer Science, Cakrawala University
 GitHub: https://github.com/djebreds
 LinkedIn: https://linkedin.com/in/refifauzan
-Email: refi.ahmad.fauzan@gmail.com
+Email: refi.ahmad.fauzan@icloud.com
 Availability: Open to consultation, fixed-scope projects, and monthly retainers
 </about_refi>
 

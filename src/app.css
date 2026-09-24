@@ -156,6 +156,11 @@
 		'Averta Std', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 		'Segoe UI Symbol';
 
+	/* Monospace — the blueprint annotation voice: coordinates, node IDs, stack tags, telemetry */
+	--font-mono:
+		ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Roboto Mono',
+		'Courier New', monospace;
+
 	--color-primary-100: #3868a7;
 	--color-primary-200: #305a91;
 	--color-primary-300: #294d7b;
@@ -173,6 +178,30 @@
 	/* Slate CSS vars — used by BentoGrid items and InfiniteMarquee chips */
 	--slate-800: #1e293b;
 	--slate-900: #0f172a;
+
+	/* Brand-tinted surfaces — derived from primary blues so cards read as one family
+	   instead of off-palette slate. Used by bento cards, project cards, chips. */
+	--surface-top: #15233c;
+	--surface-bottom: #0b1322;
+	--surface-flat: #0e1626;
+	--border-soft: rgba(125, 170, 225, 0.14);
+	--border-strong: rgba(140, 185, 235, 0.28);
+
+	/* Type rhythm — a deliberate display scale for section headings */
+	--tracking-eyebrow: 0.22em;
+
+	/* ── Blueprint system ─────────────────────────────────────────────────────
+	   The site is drawn like an engineering schematic: blueprint ground, cyan
+	   hairlines, brand-blue wires, a bright live accent. Higher contrast than the
+	   old glass look so navy doesn't sit on navy. */
+	--bp-ground: #070b14;
+	--bp-panel: #0d1626;
+	--bp-grid: rgba(120, 165, 225, 0.1);
+	--bp-grid-strong: rgba(125, 175, 235, 0.22);
+	--bp-wire: #3868a7;
+	--bp-live: #2a9dff;
+	--bp-ice: #c2e5ff;
+	--bp-anno: #8aa2c2;
 }
 
 @layer base {
@@ -196,6 +225,10 @@
 /* Explicit utility — must live outside @layer so it overrides preflight and prose */
 .font-heading {
 	font-family: var(--font-heading);
+}
+
+.font-mono {
+	font-family: var(--font-mono);
 }
 
 @layer components {
@@ -265,6 +298,154 @@
 		@apply bg-gradient-to-b from-secondary-100 to-secondary-600 bg-clip-text text-transparent;
 	}
 
+	/* Section eyebrow — the small tracked uppercase label above every heading.
+	   Encodes the section name; the trailing slash reads as a path segment. */
+	.eyebrow {
+		font-size: 0.6875rem;
+		letter-spacing: var(--tracking-eyebrow);
+		text-transform: uppercase;
+		color: rgb(125 135 150);
+	}
+
+	/* Brand-tinted raised card — the shared surface for bento + project cards.
+	   Replaces the off-palette slate gradient so every panel reads as one family. */
+	.surface-card {
+		background-image: linear-gradient(180deg, var(--surface-top), var(--surface-bottom));
+		border: 1px solid var(--border-soft);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.05),
+			0 1px 2px rgba(0, 0, 0, 0.35),
+			0 12px 30px -18px rgba(0, 0, 0, 0.7);
+	}
+
+	/* Hairline divider tinted to the brand rather than flat white */
+	.rule-soft {
+		border-color: var(--border-soft);
+	}
+
+	/* Shine button — a light sweep crosses the surface on hover */
+	.btn-shine {
+		position: relative;
+		overflow: hidden;
+	}
+	.btn-shine::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			120deg,
+			transparent 20%,
+			rgba(255, 255, 255, 0.25) 50%,
+			transparent 80%
+		);
+		transform: translateX(-120%);
+		transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.btn-shine:hover::after {
+		transform: translateX(120%);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.btn-shine::after {
+			display: none;
+		}
+	}
+
+	/* Cursor-spotlight surface: a soft highlight follows the pointer (uses --mx/--my).
+	   isolate + z-index:-1 keeps the glow above the card's own background but behind
+	   its content, so text stays readable. */
+	.spot {
+		position: relative;
+		isolation: isolate;
+	}
+	.spot::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		background: radial-gradient(
+			240px circle at var(--mx, 50%) var(--my, 0%),
+			rgba(133, 204, 255, 0.18),
+			transparent 60%
+		);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+		z-index: -1;
+	}
+	.spot:hover::before {
+		opacity: 1;
+	}
+
+	/* ── Blueprint utilities ─────────────────────────────────────────────────── */
+
+	/* Mono annotation text — the schematic's labelling voice */
+	.anno {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		letter-spacing: 0.06em;
+		color: var(--bp-anno);
+	}
+
+	/* Section node header: a mono index + name on a full-width hairline.
+	   The index is the node's address in the diagram, not decoration. */
+	.node-rule {
+		border-top: 1px solid var(--bp-grid-strong);
+	}
+
+	/* A small register tick — drafting-sheet corner / crosshair mark */
+	.bp-tick {
+		position: absolute;
+		width: 7px;
+		height: 7px;
+		border: 1px solid var(--bp-grid-strong);
+	}
+
+	/* Spec row: tabular key/value line like a datasheet entry */
+	.spec-row {
+		display: grid;
+		grid-template-columns: minmax(7rem, 9rem) 1fr;
+		gap: 1rem;
+		padding: 0.6rem 0;
+		border-top: 1px solid var(--bp-grid);
+		align-items: baseline;
+	}
+	.spec-key {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--bp-anno);
+	}
+
+	/* Blueprint panel — a drawn box, sharp corners, hairline border, faint fill.
+	   Replaces the rounded frosted glass card. */
+	.bp-panel {
+		background-color: color-mix(in srgb, var(--bp-panel) 78%, transparent);
+		border: 1px solid var(--bp-grid-strong);
+		position: relative;
+	}
+
+	/* Live accent chip — mono tag for stack / status */
+	.bp-tag {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		letter-spacing: 0.02em;
+		color: var(--bp-ice);
+		border: 1px solid color-mix(in srgb, var(--bp-wire) 55%, transparent);
+		background: color-mix(in srgb, var(--bp-wire) 16%, transparent);
+		padding: 0.15rem 0.5rem;
+		white-space: nowrap;
+	}
+
+	/* Drafting title-block — fixed sheet metadata in the corner */
+	.title-block {
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		letter-spacing: 0.08em;
+		color: var(--bp-anno);
+		text-transform: uppercase;
+	}
+
 	/* kube.io `<main>` in DevTools renders ~728px wide (max-w-4xl + viewport); we match that column */
 	.blog-prose {
 		@apply prose max-w-none prose-invert prose-p:text-left prose-p:text-[16px] prose-p:leading-[22px] prose-p:sm:text-justify prose-a:text-secondary-200 prose-a:underline-offset-4 hover:prose-a:text-white prose-code:text-secondary-100 prose-pre:bg-transparent prose-pre:p-0;
@@ -279,7 +460,13 @@
 		height: auto;
 	}
 
-	/* Chat bubble markdown — compact prose for the AI chat widget */
+	/* Bento card shadow — matches Aceternity UI shadow-input */
+	.shadow-input {
+		box-shadow:
+			0px 2px 3px -1px rgba(0,0,0,0.1),
+			0px 1px 0px 0px rgba(25,28,33,0.02),
+			0px 0px 0px 1px rgba(25,28,33,0.08);
+	}
 	.chat-prose {
 		@apply prose prose-invert max-w-none
 			prose-p:my-1 prose-p:text-sm prose-p:leading-relaxed prose-p:text-neutral-100
@@ -427,4 +614,56 @@
 	::view-transition-new(*) {
 		animation: none !important;
 	}
+}
+
+/* ── Signature: data-flow spine ───────────────────────────────────────────────
+   A vertical bus down the left margin with a pulse travelling along it, like
+   data moving through the system. */
+.wire-spine {
+	background: linear-gradient(
+		to bottom,
+		transparent,
+		var(--bp-grid-strong) 6%,
+		var(--bp-grid-strong) 94%,
+		transparent
+	);
+}
+.wire-pulse {
+	background: linear-gradient(to bottom, transparent, var(--bp-live), transparent);
+	filter: drop-shadow(0 0 6px var(--bp-live));
+	animation: wire-flow 4.5s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes wire-flow {
+	0% {
+		top: -20%;
+		opacity: 0;
+	}
+	12% {
+		opacity: 1;
+	}
+	88% {
+		opacity: 1;
+	}
+	100% {
+		top: 100%;
+		opacity: 0;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.wire-pulse {
+		animation: none;
+		opacity: 0;
+	}
+}
+
+/* Blueprint node-marker pulse on section anchors */
+@keyframes node-blink {
+	0%, 100% { opacity: 0.4; }
+	50% { opacity: 1; }
+}
+.node-dot {
+	animation: node-blink 3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+	.node-dot { animation: none; }
 }

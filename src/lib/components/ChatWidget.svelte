@@ -181,8 +181,11 @@
 			<!-- Header -->
 			<div class="mb-1 flex items-start justify-between gap-2 px-3">
 				<div class="flex min-w-0 flex-col gap-0.5">
-					<span class="text-xs font-normal text-slate-500">Ask about Refi · gemma3</span>
-					<span class="truncate text-[11px] text-slate-600" title={chatCtx.pathname}>
+					<span class="flex items-center gap-1.5 text-xs font-medium text-neutral-300">
+						<span class="h-1.5 w-1.5 rounded-full bg-secondary-300 shadow-[0_0_6px] shadow-secondary-300/70" aria-hidden="true"></span>
+						Portfolio assistant
+					</span>
+					<span class="truncate text-[11px] text-slate-500" title={chatCtx.pathname}>
 						On this page: {chatCtx.label}
 					</span>
 				</div>

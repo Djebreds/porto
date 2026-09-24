@@ -7,14 +7,19 @@
 		{ title: 'Home', href: appLink('/#home') },
 		{ title: 'About', href: appLink('/#about') },
 		{ title: 'Skills', href: appLink('/#skills') },
-		{ title: 'Experience', href: appLink('/#experience') },
+		{ title: 'Projects', href: appLink('/#projects') },
 		{ title: 'Blogs', href: appLink('/blog') },
-		{ title: 'Services', href: appLink('/#services') },
 		{ title: 'Contact', href: appLink('/#contact') }
 	] as const;
 
 	let listEl = $state<HTMLElement | null>(null);
 	let indicator = $state({ left: 0, width: 0 });
+
+	const activeIndex = $derived.by(() => {
+		void page.url.pathname;
+		void page.url.hash;
+		return activeLinkIndex();
+	});
 
 	function activeLinkIndex(): number {
 		const p = page.url.pathname;
@@ -22,9 +27,8 @@
 		const h = page.url.hash;
 		if (h === '#about') return 1;
 		if (h === '#skills') return 2;
-		if (h === '#experience') return 3;
-		if (h === '#services') return 5;
-		if (h === '#contact') return 6;
+		if (h === '#projects') return 3;
+		if (h === '#contact') return 5;
 		return 0;
 	}
 
@@ -86,11 +90,15 @@
 				<ul
 					class="relative flex flex-nowrap items-center gap-0.5 text-xs font-medium sm:gap-1 sm:text-sm md:gap-6"
 				>
-					{#each links as link (link.href)}
+					{#each links as link, i (link.href)}
 						<li class="shrink-0">
 							<a
 								href={link.href}
-								class="inline-flex rounded-full px-2 py-2 font-normal whitespace-nowrap text-white transition-colors sm:px-2.5"
+								aria-current={i === activeIndex ? 'page' : undefined}
+								class="inline-flex rounded-full px-2 py-2 font-normal whitespace-nowrap transition-colors sm:px-2.5 {i ===
+								activeIndex
+									? 'text-white'
+									: 'text-neutral-300 hover:text-white'}"
 							>
 								{link.title}
 							</a>

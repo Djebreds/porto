@@ -32,7 +32,7 @@
 	class="relative mx-auto w-full max-w-[728px] px-8 pt-24 pb-28 max-sm:px-4 sm:pt-28 sm:pb-12"
 >
 	<div in:fade={{ duration: 250 }}>
-		<p class="text-sm tracking-[0.2em] text-neutral-500 uppercase">Blogs /</p>
+		<p class="eyebrow">Blogs /</p>
 		<h1 class="mt-3 font-heading text-4xl font-extrabold uppercase md:text-5xl">Blogs</h1>
 		<p class="mt-4 max-w-2xl text-neutral-400">
 			Long-form notes with GitHub-hosted discussions via
@@ -56,7 +56,7 @@
 								class="group flex flex-wrap gap-6 md:flex-nowrap"
 							>
 								<div
-									class="glass-frost flex h-28 w-24 shrink-0 flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-center"
+									class="surface-card flex h-28 w-24 shrink-0 flex-col items-center justify-center rounded-2xl text-center transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:border-[var(--border-strong)]"
 								>
 									<div class="text-xs font-semibold text-neutral-400">{d.month}</div>
 									<div class="text-3xl font-bold text-white">{d.day}</div>
